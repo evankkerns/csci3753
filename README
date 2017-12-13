@@ -1,0 +1,85 @@
+Evan Kerns
+CSCI: 3753
+PA3
+Collaborated with Sami Meharzi
+
+Build:
+	In PA3 directory: "make"
+Run:
+	In PA3 directory: "./multi-lookup <inputfile_1> ... <inputfile_n> <outputfile>"
+
+
+multi-lookup.c
+	includes multi-lookup.h
+	main
+		Check min and max arguments
+		Initializes locks
+		Loops through and creates requester and resolver threads
+		Joins both threads
+	requester	
+		Takes in the current input file
+		Sleeps if queue is full
+		Pushes hostname onto queue
+	resolver
+		While there is things in the queue
+			If the queue is empty, it waits until it's not empty
+			Pops the hostname
+			Gets IP string
+			Prints to output
+
+multi-lookup.h
+	includes queue.h, util.h, and other necessary libraries
+	Limit settings according to the assignment
+	Other variables taken from lookup.c
+	Declare lock, signal, queue, global counter
+	Declare requester and resolver
+
+Makefile
+	Added multi-lookup
+		references multi-lookup.o, queue.o, and util.o
+	Added multi-lookup.o
+		references multi-lookup(.c / .h)
+
+------------------------------------------------------------------
+
+CS3753 (Operating Systems)
+Spring 2012
+University of Colorado Boulder
+Programming Assignment 2
+Public Code
+
+By Andy Sayler - 2012
+http://www.andysayler.com
+
+With help from:
+Junho Ahn - 2012
+
+Adopted from previous code by
+ Chris Wailes <chris.wailes@gmail.com> - 2010
+ Wei-Te Chen <weite.chen@colorado.edu> - 2011
+ Blaise Barney - pthread-hello.c
+
+---Folders---
+input - names*.txt input files
+handout - Assignment description and documentation
+
+---Executables---
+lookup - A basic non-threaded DNS query-er
+queueTest - Unit test program for queue
+pthread-hello ; A simple threaded "Hello World" program
+
+---Examples---
+Build:
+ make
+
+Clean:
+ make clean
+
+Lookup DNS info for all names files in input folder:
+ ./lookup input/names*.txt results.txt
+
+Check queue for memory leaks:
+ valgrind ./queueTest
+
+Run pthread-hello
+ ./pthread-hello
