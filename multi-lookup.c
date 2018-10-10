@@ -7,7 +7,7 @@
 
 int main(int argc, char* argv[]){
 
-    // Local variables (from lookup.c) (do they even do anything?)
+    // Local variables (from lookup.c)
     char errorstr[SBUFSIZE];
     int i;
 
